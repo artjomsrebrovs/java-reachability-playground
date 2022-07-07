@@ -2,6 +2,7 @@ name: Example workflow for Maven using Snyk
 on: push
 jobs:
   security:
+    name: Run Snyc security check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -11,6 +12,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   build:
+    name: Run Sonar security check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,7 +23,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Execute Maven verify sonar
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=java-reachability-playground -Dsonar.organization=artjomsrebrovs -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=javareachabilityplayground -Dsonar.organization=artjomsrebrovs -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
