@@ -30,13 +30,13 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}        
   zap_scan:
     runs-on: ubuntu-latest
-    name: scan-webapplication
+    name: Scan web application
     needs: security
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: main
+          ref: master
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.7.0
         with:
@@ -46,7 +46,7 @@ jobs:
           cmd_options: '-a'  
   run-shell-command:
     runs-on: ubuntu-latest
-    name: run-echo-command
+    name: Run echo command
     needs: zap_scan
     steps:
       - name: Echo status
